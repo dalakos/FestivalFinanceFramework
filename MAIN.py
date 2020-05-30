@@ -21,7 +21,7 @@ TRANSFER_IN_PMT = 0             # Enter in total amount transferred into CapCom 
 TRANSFER_OUT_PMT = 0          # Enter in total amount transferred out of CapCom accounts
 ECS = 0                                # East Commerce Solutions overPMT. waiting for reimbursement.
 
-HSY = 1997                              # Historical results start year. Should be 1997
+HSY = 1997                              # Historical results start year. Should be 1997.
 SPY = 2009                              # Starting plot year. Default 2009.
 
 # You need to generate a separate folder by year. Note, this is done autom in the startfile.
