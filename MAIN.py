@@ -301,6 +301,7 @@ FR1['D7'].value = PFR1['C7'].value
 FR1['D8'].value = PFR1['C8'].value
 FR1['D9'].value = PFR1['C9'].value
 FR1['D10'].value = PFR1['C10'].value
+
 # Fill in this year's results
 FR1['C4'].value = FS['total.fri'].iloc[-1]
 FR1['C5'].value = FS['total.sat'].iloc[-1]
