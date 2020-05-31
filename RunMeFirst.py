@@ -14,6 +14,10 @@ import shutil
 
 #directoryPath=(__file__)
 directoryPath=os.path.dirname(os.path.realpath(__file__))
+mainPath=os.path.dirname(directoryPath)
+
+print(directoryPath)
+print(mainPath) 
 
 # First read master start file contining correct year to create new folder and files as well as a current account list.
 STARTFILE = pd.ExcelFile(directoryPath + '/MasterStartFile.xlsx')
@@ -21,28 +25,31 @@ STARTFILE = pd.ExcelFile(directoryPath + '/MasterStartFile.xlsx')
 A = STARTFILE.sheet_names
 DF1 = STARTFILE.parse(A[0])
 
-YEAR=int(DF1['Year'][0]);
+#YEAR=int(DF1['Year'][0]);           # Use this option to enter in manually in Excel sheet 'MasterStartFile.xlsx'
+YEAR = input("Enter the festival year: ")   # User input when program is run.
+print(YEAR)
+
 ACCOUNTS=DF1['Accounts'];
 
 # Create a new directory. Check to make sure it doesn't already exist.
 
-newpath = directoryPath+'/'+str(YEAR) 
+newpath = mainPath+'/'+str(YEAR) 
 if not os.path.exists(newpath):
     os.makedirs(newpath)
 
-os.chdir(directoryPath+'/'+str(YEAR))
+os.chdir(mainPath+'/'+str(YEAR))
 
 # Copy main exetutable file to new directory and rename file
-shutil.copy(directoryPath + '/MasterStartFile.xlsx',directoryPath + '/' +str(YEAR) + '/MasterStartFile.xlsx')
-os.rename(directoryPath + '/' +str(YEAR) + '/MasterStartFile.xlsx',directoryPath + '/' +str(YEAR) + '/MasterStartFile.xlsx')
+shutil.copy(directoryPath + '/MasterStartFile.xlsx',mainPath + '/' +str(YEAR) + '/MasterStartFile.xlsx')
+os.rename(mainPath + '/' +str(YEAR) + '/MasterStartFile.xlsx',mainPath + '/' +str(YEAR) + '/MasterStartFile.xlsx')
 
 # Copy main exetutable file to new directory and rename file
-shutil.copy(directoryPath + '/MAIN.py',directoryPath + '/' +str(YEAR) + '/MAIN.py')
-os.rename(directoryPath + '/' +str(YEAR) + '/MAIN.py',directoryPath + '/' +str(YEAR) + '/MAIN' + str(YEAR) + '.py')
+shutil.copy(directoryPath + '/MAIN.py',mainPath + '/' +str(YEAR) + '/MAIN.py')
+os.rename(mainPath + '/' +str(YEAR) + '/MAIN.py',mainPath + '/' +str(YEAR) + '/MAIN' + str(YEAR) + '.py')
 
 # Copy main exetutable file to new directory and rename file
-shutil.copy(directoryPath + '/Final_report_supporting_data.xlsx',directoryPath + '/' +str(YEAR) + '/Final_report_supporting_data.xlsx')
-os.rename(directoryPath + '/' +str(YEAR) + '/Final_report_supporting_data.xlsx',directoryPath + '/Final_' +str(YEAR) + '_report_supporting_data.xlsx')
+shutil.copy(directoryPath + '/Final_report_supporting_data.xlsx',mainPath + '/' +str(YEAR) + '/Final_report_supporting_data.xlsx')
+os.rename(mainPath + '/' +str(YEAR) + '/Final_report_supporting_data.xlsx',mainPath + '/' +str(YEAR) +'/Final_' +str(YEAR) + '_report_supporting_data.xlsx')
 
 
 #import os

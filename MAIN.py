@@ -294,6 +294,9 @@ PFR = load_workbook(DIRECTORY_MAIN_PATH + '/' +str(YEAR-1)+'/Final_'+ str(YEAR -
 PFR1 = PFR.worksheets[0]
 FR1 = FR.worksheets[0]
 # Fill in last year's values
+FR1['D3'].value = str(YEAR - 1) + ' Festival'
+FR1['C3'].value = str(YEAR) + ' Festival'
+
 FR1['D4'].value = PFR1['C4'].value
 FR1['D5'].value = PFR1['C5'].value
 FR1['D6'].value = PFR1['C6'].value
