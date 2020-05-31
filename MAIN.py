@@ -5,6 +5,8 @@
 # 6/3/2019 Changed method of reading in historical data. Read in previous year and make changes
 #          to parent directory file.
 # 6/17/2019 Simplified wording of transfer PMTs into and out of CapCom accounts. Took out FN.
+# 5/30/2020 Added parameters for starting dates and plotting dates. Added auto populate of 
+#           last year's festival results to final excel file table for report.
 #################################################################################################
 
 import pandas as pd
@@ -288,8 +290,18 @@ FST = FS.sheet_names
 FS = FS.parse(FST[0])
 
 FR = load_workbook(DIRECTORY_PATH+'/Final_'+ str(YEAR)+'_report_supporting_data.xlsx')
+PFR = load_workbook(DIRECTORY_MAIN_PATH + '/' +str(YEAR-1)+'/Final_'+ str(YEAR - 1)+'_report_supporting_data.xlsx')
+PFR1 = PFR.worksheets[0]
 FR1 = FR.worksheets[0]
-
+# Fill in last year's values
+FR1['D4'].value = PFR1['C4'].value
+FR1['D5'].value = PFR1['C5'].value
+FR1['D6'].value = PFR1['C6'].value
+FR1['D7'].value = PFR1['C7'].value
+FR1['D8'].value = PFR1['C8'].value
+FR1['D9'].value = PFR1['C9'].value
+FR1['D10'].value = PFR1['C10'].value
+# Fill in this year's results
 FR1['C4'].value = FS['total.fri'].iloc[-1]
 FR1['C5'].value = FS['total.sat'].iloc[-1]
 FR1['C6'].value = FS['total.sun'].iloc[-1]
@@ -300,7 +312,6 @@ FR1['C10'].value = INCOME - EXPENSES + CAPEX_AND_INVENTORY
 FR1['B12'].value = "Simulation run"
 FR1['C12'].value = time.strftime("%c")
 FR.save(DIRECTORY_PATH+'/Final_'+ str(YEAR)+'_report_supporting_data.xlsx')
-
 
 plt.figure()
 
