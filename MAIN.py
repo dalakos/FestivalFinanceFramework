@@ -7,12 +7,17 @@
 # 6/17/2019 Simplified wording of transfer PMTs into and out of CapCom accounts. Took out FN.
 # 5/30/2020 Added parameters for starting dates and plotting dates. Added auto populate of 
 #           last year's festival results to final excel file table for report.
+# 1/17/2021 Update to Python 3. 
 #################################################################################################
 
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
-from openpyxl import load_workbook
+
+import matplotlib as plt
+#from matplotlib import pyplot as plt
+#import matplotlib as plt
+#from openpyxl import load_workbook
 import time
 from datetime import date
 today = date.today()
@@ -36,7 +41,7 @@ A = STARTFILE.sheet_names
 DF1 = STARTFILE.parse(A[0])
 
 YEAR = int(DF1['Year'][0])
-DATES = (str(DF1['Days'][0][1:-1]), str(DF1['Days'][1][1:-1]), str(DF1['Days'][2][1:-1]))
+#DATES = (str(DF1['Days'][0][1:-1]), str(DF1['Days'][1][1:-1]), str(DF1['Days'][2][1:-1]))
 ACCOUNTS = DF1['Accounts']
 ACCOUNTS_NUM = len(DF1['Accounts'])
 
@@ -46,7 +51,7 @@ os.chdir("..")
 DIRECTORY_MAIN_PATH = os.getcwd()
 os.chdir(DIRECTORY_PATH)
 
-plt.close("all")
+#plt.close("all")
 
 pd.options.display.float_format = '${:,.2f}'.format
 
@@ -145,7 +150,7 @@ CAPEX = DF1[DF1['Account'] == "capital expense"]['Amount'].sum()
 CAPEX_AND_INVENTORY = DF1[(DF1['Account'] == "capital expense") | (DF1['Account'] == "inventory")]['Amount'].sum()
 
 # Read in the CapCom transaction summary. Use online account tool.
-CC = pd.read_csv(DIRECTORY_PATH+'/CapComLedger.csv', skiprows=2)
+CC = pd.read_csv(DIRECTORY_PATH +'/CapComLedger.csv', skiprows=2)
 AL = list(CC)
 DATE_RANGE = AL[0]
 CC = pd.read_csv(DIRECTORY_PATH + '/CapComLedger.csv', skiprows=3)
