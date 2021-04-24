@@ -7,12 +7,15 @@ Created on Thu Apr 22 09:35:08 2021
 import numpy as np
 import matplotlib.pyplot as plt
 
+# set seed
+np.random.seed(1)
+
 # MODEL INPUT
 NUM_SEG = 8 # How many segments to model
 SEG_LEN = 15  # Length of a pick-up time segment in minutes
 MAX_NUM_SEG = 50 # Number of customers/cars per segment
 STD_ARRIVAL_MIN = 5 # standard deviation in minutes for arrival times to target
-RES_TIME_MIN = 5 # residence time average in minutes
+RES_TIME_MIN = 10 # residence time average in minutes
 # stdResTime = 3 # standard deviation in minutes for residence time
 MAX_WALKINS = 5
 
@@ -55,7 +58,7 @@ plt.title('Cars in parking lot as a fxn of time. Max # capacity plan = '
           +str(np.max(histCount) + MAX_WALKINS))
 
 plt.figure()
-plt.hist(carEnd-carStart)
+plt.hist(carEnd-carStart,bins=max(carEnd-carStart)-min(carEnd-carStart)+1)
 plt.ylabel('# of counts')
 plt.xlabel('Residence time in minutes')
 plt.grid(axis='both')
