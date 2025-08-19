@@ -15,9 +15,11 @@ NUM_SEG = 8 # How many segments to model
 SEG_LEN = 15  # Length of a pick-up time segment in minutes
 MAX_NUM_SEG = 50 # Number of customers/cars per segment
 STD_ARRIVAL_MIN = 5 # standard deviation in minutes for arrival times to target
-RES_TIME_MIN = 10 # residence time average in minutes
+RES_TIME_MIN = 30 # residence time minimum in minutes
 # stdResTime = 3 # standard deviation in minutes for residence time
 MAX_WALKINS = 5
+WEIBULL_SHAPE = 1
+WEIBULL_MULT = 2
 
 NUM_CUST = NUM_SEG * MAX_NUM_SEG # Total number of customers
 
@@ -28,8 +30,7 @@ for i in range(NUM_SEG):
     for j in range(MAX_NUM_SEG):
         TMP_TIME = np.random.normal(i*SEG_LEN, STD_ARRIVAL_MIN, 1)
         carTimeStart.append(int(TMP_TIME))
-        #carTimeEnd.append(int(TMP_TIME + RES_TIME_MIN + np.random.weibull(.7,1)))
-        carTimeEnd.append(int(TMP_TIME + RES_TIME_MIN + 5*np.random.weibull(1,1)))
+        carTimeEnd.append(int(TMP_TIME + RES_TIME_MIN + WEIBULL_MULT*np.random.weibull(WEIBULL_SHAPE,1)))
 
 carStart = np.array(carTimeStart)
 carEnd = np.array(carTimeEnd)
